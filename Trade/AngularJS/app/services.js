@@ -9,7 +9,7 @@ var forexServices = angular.module('forexServices', ['ngResource']);
 
 forexServices.factory('Forex', ['$resource',
   function($resource){
-    return $resource('data/forex.json', {}, {
+    return $resource('AngularJs/data/forex.json', {}, {
       query: {method:'GET', params:{}, isArray:true}
     });
   }]
@@ -19,7 +19,7 @@ forexServices.factory('Forex', ['$resource',
 
 userServices.factory('User', ['$resource',
   function($resource){
-    return $resource('data/user.json', {}, {
+   return $resource('AngularJs/data/user.json', {}, {
       query: {method:'GET', params:{}, isArray:true}
     });
   }]
