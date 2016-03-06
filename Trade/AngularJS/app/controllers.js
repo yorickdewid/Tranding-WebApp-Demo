@@ -7,13 +7,17 @@ var forexControllers = angular.module('forexControllers', []);
 forexControllers.controller('LoginCtrl', ['$scope', '$location', 'User',
   function ($scope, $location, User) {
 
+  	if (sessionStorage.AuthUser) {
+  		$location.path('wallet/' + sessionStorage.AuthUser);
+  	}
+
   	$scope.user = User.get({}, function (user) {
   		$scope.user = user.Users;
   	});
 
   	$scope.onchange = function (user) {
   		if (user != undefined) {
-  			console.log(user);
+  			sessionStorage.AuthUser = user;
   			$location.path('wallet/' + user);
   		}
   	}
