@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trade.Models
 {
@@ -10,7 +11,8 @@ namespace Trade.Models
         public int Id { get; set; }
         public User UserId { get; set; }
         public double Amount { get; set; }
-        public List<Order> Orders { get; set; }
+        [NotMapped]
+        public List<Order> Trades { get; set; }
 
         public bool removeAmount(double Amount)
         {

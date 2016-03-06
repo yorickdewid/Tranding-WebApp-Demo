@@ -9,7 +9,9 @@ namespace Trade.Models
     {
         public int Id { get; set; }
         public User UserId { get; set; }
-        public DateTime Date { get; set; }
+        public string Currency { get; set; }
+        public long BuyDate { get; set; }
+        public long SellDate { get; set; }
         public int Amount { get; set; }
         public bool OrderType { get; set; }
     }
