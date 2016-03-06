@@ -1,1 +1,24 @@
-<h2>Wallet</h2>
+ <h2>My Wallet</h2>
+ <p>Current active trades:</p>
+ <table class="table table-bordered">
+  <thead>
+   <tr>
+    <th>Currency</th>
+    <th>Bought at</th>
+    <th>Sold at</th>
+    <th>Shares</th>
+    <th>Gain/Loss</th>
+    <th></th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr ng-repeat="cur in trades" ng-class="checkProfit(cur)">
+    <td>{{ cur.Currency }}</td>
+    <td>{{ cur.BuyDate | date:'dd-MM-yyyy HH:mm:ss' }}</td>
+    <td>{{ cur.SellDate ? (cur.SellDate | date:'dd-MM-yyyy HH:mm:ss') : '-' }}</td>
+    <td>{{ cur.Amount }}</td>
+    <td>{{ cur.profit ? (cur.profit > 0 ? ('+' + cur.profit | number:2) : (cur.profit | number:2)) : '-' }}</td>
+    <td><button ng-if="!cur.profit" class="btn btn-xs btn-danger">Sell shares</button></td>
+   </tr>
+  </tbody>
+ </table>

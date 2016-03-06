@@ -17,7 +17,7 @@ forexApp.config(['$routeProvider',
         templateUrl: 'AngularJs/partials/login.html',
         controller: 'LoginCtrl'
       }).
-      when('/wallet', {
+      when('/wallet/:id', {
        templateUrl: 'AngularJs/partials/wallet.html',
         controller: 'WalletCtrl'
       }).

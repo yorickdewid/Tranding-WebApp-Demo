@@ -5,8 +5,6 @@
 var userServices = angular.module('userServices', ['ngResource']);
 var forexServices = angular.module('forexServices', ['ngResource']);
 
-
-
 forexServices.factory('Forex', ['$resource',
   function($resource){
     return $resource('AngularJs/data/forex.json', {}, {
@@ -14,8 +12,6 @@ forexServices.factory('Forex', ['$resource',
     });
   }]
 );
-
-
 
 userServices.factory('User', ['$resource',
   function($resource){

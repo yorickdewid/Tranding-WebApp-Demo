@@ -1,0 +1,36 @@
+﻿{
+ "Trades": [
+ {
+  "Id": 1,
+  "Currency": "USD",
+  "BuyDate": 1457262011,
+  "BuyRate": 1,
+  "Amount": 435
+ },
+ {
+  "Id": 2,
+  "Currency": "EUR",
+  "BuyDate": 1457262011,
+  "BuyRate": 0.908622,
+  "Amount": 20
+ },
+ {
+  "Id": 3,
+  "Currency": "YER",
+  "BuyDate": 1457262011,
+  "SellDate": 1457264011,
+  "BuyRate": 214.964,
+  "SellRate": 216.964,
+  "Amount": 731
+ },
+ {
+  "Id": 4,
+  "Currency": "AED",
+  "BuyDate": 1457261011,
+  "SellDate": 1457266011,
+  "BuyRate": 4.27295,
+  "SellRate": 3.67295,
+  "Amount": 23
+ }
+ ]
+}
