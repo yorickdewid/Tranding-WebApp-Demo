@@ -8,7 +8,7 @@ namespace Trade.Models
     public class Forex
     {
         public int Id { get; set; }
-        public int Code { get; set; }
-        public int Ratio { get; set; }
+        public string Code { get; set; }
+        public double Ratio { get; set; }
     }
 }
