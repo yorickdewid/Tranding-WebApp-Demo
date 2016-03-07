@@ -15,7 +15,7 @@ forexServices.factory('Forex', ['$resource',
 
 userServices.factory('User', ['$resource',
   function($resource){
-   return $resource('AngularJs/data/user.json', {}, {
+   return $resource('api/user', {}, {
       query: {method:'GET', params:{}, isArray:true}
     });
   }]
