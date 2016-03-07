@@ -19,12 +19,26 @@ namespace Trade.Controllers
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult GetWallet(int id)
         {
-            Wallet wallet = db.Wallets.Find(id);
+            db.Orders.Load();
+            db.Users.Load();
+            Wallet wallet = null;
+            IEnumerable<Wallet> tmp = db.Wallets.Where(x => x.UserId.Id == id);
+            if (tmp.Count() > 0)
+            {
+                wallet = tmp.First();
+            }
             if (wallet == null)
             {
                 return NotFound();
             }
-            wallet.Trades = db.Orders.Where(x => x.UserId.Id == wallet.UserId.Id).ToList();
+            try
+            {
+                wallet.Trades = db.Orders.Where(x => x.UserId.Id == wallet.UserId.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.Write("test");
+            }
 
             return Json(wallet);
         }

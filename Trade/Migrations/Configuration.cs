@@ -4,6 +4,7 @@ namespace Trade.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Trade.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Trade.DBCreate>
     {
@@ -16,17 +17,13 @@ namespace Trade.Migrations
         protected override void Seed(Trade.DBCreate context)
         {
             //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Users.AddOrUpdate(new User { Name = "Arie" });
+            context.SaveChanges();
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            Int32 unixTimestamp2 = (Int32)(DateTime.UtcNow.AddHours(3).Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            context.Orders.AddOrUpdate(new Order { Amount = 500, Currency = "AUS", BuyDate = unixTimestamp, SellDate = unixTimestamp2, OrderType = true, UserId = context.Users.First() });
+            context.Wallets.AddOrUpdate(new Wallet { Amount = 1000, UserId = context.Users.First() });
+            context.SaveChanges();
         }
     }
 }
