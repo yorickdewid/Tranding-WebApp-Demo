@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Trade.Models;
@@ -37,7 +36,7 @@ namespace Trade.Controllers
             }
             catch (Exception e)
             {
-                Console.Write("test");
+                Console.Write("test" + e.Data);
             }
 
             return Json(wallet);

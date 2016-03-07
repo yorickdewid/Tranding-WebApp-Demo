@@ -13,6 +13,5 @@ namespace Trade.Models
         public long BuyDate { get; set; }
         public long SellDate { get; set; }
         public int Amount { get; set; }
-        public bool OrderType { get; set; }
     }
 }
