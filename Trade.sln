@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trade", "Trade\Trade.csproj", "{2E9E1C7A-9282-4376-ACBF-30E74953DF6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIPoller", "APIPoller\APIPoller.csproj", "{B0819586-85D3-4C31-80DD-5E527B2D0DA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2E9E1C7A-9282-4376-ACBF-30E74953DF6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E9E1C7A-9282-4376-ACBF-30E74953DF6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E9E1C7A-9282-4376-ACBF-30E74953DF6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0819586-85D3-4C31-80DD-5E527B2D0DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0819586-85D3-4C31-80DD-5E527B2D0DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0819586-85D3-4C31-80DD-5E527B2D0DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0819586-85D3-4C31-80DD-5E527B2D0DA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
