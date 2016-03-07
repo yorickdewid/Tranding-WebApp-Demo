@@ -30,9 +30,9 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
  	$scope.userid = $routeParams.id;
 
  	$http.get('/api/wallet/' + $scope.userid).then(function (response) {
- 		var fTrades = [];
+ 	    var fTrades = [];
+ 	    var amount = response.data.Amount;
  		angular.forEach(response.data.Trades, function (value, key) {
- 		    console.log("how much");
  			if (value.SellRate)
  				value.profit = (value.SellRate - value.BuyRate) * value.Amount;
  			value.BuyDate = new Date(value.BuyDate * 1000);
@@ -41,6 +41,7 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
  			fTrades.push(value);
  		});
 
+ 		$scope.Amount = amount;
  		$scope.trades = fTrades;
  	})
 
