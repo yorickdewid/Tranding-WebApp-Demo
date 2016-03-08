@@ -1,3 +1,4 @@
+<link href="app.css" rel="stylesheet">
 <h2>Overview of Forex</h2>
 <hr />
 <table class="table table-bordered" style="width:400px;margin:auto">
@@ -9,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="(key, value) in rates">
+        <tr ng-repeat="(key, value) in rates" ng-class="{'btn-success' : success ,'btn-danger' : failed}">
             <td>{{ key }}</td>
             <td>{{ value }}</td>
             <td><input type="text" ng-model="orderAmount"></td>

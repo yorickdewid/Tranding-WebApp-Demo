@@ -7,9 +7,12 @@ var forexControllers = angular.module('forexControllers', []);
 forexControllers.controller('LoginCtrl', ['$scope', '$location', 'User',
   function ($scope, $location, User) {
 
-    if ($.parseJSON(sessionStorage.user)) {
-          $location.path('wallet/' + $.parseJSON(sessionStorage.user.Id));
-  	}
+      if (sessionStorage.getItem("user") != undefined) {
+          var user = $.parseJSON(sessionStorage.user);
+          if (user) {
+              $location.path('wallet/' + user.Id);
+          }
+      }
 
   	$scope.users = User.get({}, function (list) {
   	    console.log(list);
@@ -63,20 +66,26 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
  }]
 );
 
-forexControllers.controller('ForexCtrl', ['$scope','$http','Forex',
+forexControllers.controller('ForexCtrl', ['$scope', '$http', 'Forex',
   function ($scope, $http, Forex) {
   	$scope.forex = Forex.get({}, function (forex) {
   	    $scope.rates = forex.rates;
   		/*console.log(forex.rates);*/
   	});
 
-  	$scope.success = false;
+  	$scope.succes = false;
+  	$scope.failure = false;
 
-  	$scope.order = function (amount, currency) {
+  	$scope.colorVal = '';
+  	var colCount = 0;
+  	var colorArr = ['redBg', 'greenBg'];
+  	var currColor = '';
+
+  	$scope.order = function (amount, currency,tmp) {
   	    var user = $.parseJSON(sessionStorage.user);
   	    if (amount > 0) {
   	        var data = {
-  	            "UserId": user, // Creates new user..
+  	            "UserId": user.Id, // Creates new user..
   	            "Currency": currency,
   	            "BuyDate": 1457357484,
   	            "SellDate": 1457368284,
@@ -85,7 +94,7 @@ forexControllers.controller('ForexCtrl', ['$scope','$http','Forex',
   	        $http.post('/api/order/', data).then(function successCallback(response) {
   	            $scope.success = true;
   	        }, function errorCallback(response) {
-  	            console.log("Error :" +response)
+  	            $scope.failure = false;
   	        });
   	    }
   	}

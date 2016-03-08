@@ -32,7 +32,7 @@ namespace Trade.Controllers
             }
             try
             {
-                wallet.Trades = db.Orders.Where(x => x.UserId.Id == wallet.UserId.Id).ToList();
+                wallet.Trades = db.Orders.Where(x => x.UserId == wallet.UserId.Id).ToList();
             }
             catch (Exception e)
             {

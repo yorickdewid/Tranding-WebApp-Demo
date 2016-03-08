@@ -5,3 +5,27 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+.greenBg-add, .greenBg-remove,
+.redBg-add, .redBg-remove,
+.blueBg-add, .blueBg-remove,
+.whiteBg-add, .whiteBg-remove {
+  transition: background 1000ms linear;
+}
+
+.greenBg,
+.greenBg-add.greenBg-add-active {
+    background: #00ff00;
+}
+.redBg,
+.redBg-add.redBg-add-active {
+    background: #ff0000;
+}
+.blueBg,
+.blueBg-add.blueBg-add-active {
+    background: #0000ff;
+}
+.whiteBg,
+.whiteBg-add.whiteBg-add-active {
+    background: #ffffff;
+}
