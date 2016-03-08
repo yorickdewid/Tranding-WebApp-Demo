@@ -13,17 +13,26 @@ namespace APIPoller
 { 
     class Program
     {
+        /// <summary>
+        /// Clear the database, retrieve the data and add this to the database.
+        /// This is meant to be done hourly.
+        /// </summary>
+        /// <param name="args">none</param>
         static void Main(string[] args)
         {
-            Console.Write("Groep 8 API poller");
-            DBCreate db = new DBCreate();
+            Console.Write("Groep 8 API poller\n");
+            
             string APIurl = ConfigurationManager.AppSettings["APIurl"];
             string App_id = ConfigurationManager.AppSettings["App_id"];
 
             WebClient c = new WebClient();
             var data = (new WebClient()).DownloadString("https://" + APIurl + "?app_id=" + App_id);
             var CurrencyList = (JObject.Parse(data)).Last.First.ToList();
-            foreach(var Currency in CurrencyList)
+
+            DBCreate db = new DBCreate();
+            ClearAllData(db);
+            Console.WriteLine("Starting the import... ");
+            foreach (var Currency in CurrencyList)
             {
                 Forex f = new Forex();
                 f.Code = ((Newtonsoft.Json.Linq.JProperty)Currency).Name.ToString();
@@ -31,12 +40,33 @@ namespace APIPoller
 
                 AddNewForex(db, f);
             }
+            Console.WriteLine("[Done]");
+            Console.Write("Saving the database... ");
+            db.SaveChanges();
+            Console.WriteLine("[Done]");
+           
         }
 
+        /// <summary>
+        /// Removes everything in the Forex table
+        /// </summary>
+        /// <param name="db">DBCreate object to connect to database</param>
+        public static void ClearAllData(DBCreate db)
+        {
+            Console.Write("Clearing the database... ");
+            db.Forexes.RemoveRange(db.Forexes);
+            Console.WriteLine("[Done]");
+        }
+
+        /// <summary>
+        /// Add a Forex object
+        /// </summary>
+        /// <param name="db">DBCreate object to connect to database</param>
+        /// <param name="forex">The Forex object to add</param>
         private static void AddNewForex(DBCreate db, Forex forex)
         {
+            Console.WriteLine("    Importing: [" +forex.Code + " => " + forex.Ratio + "]");
             db.Forexes.Add(forex);
-            db.SaveChanges();
         }
     }
 }
