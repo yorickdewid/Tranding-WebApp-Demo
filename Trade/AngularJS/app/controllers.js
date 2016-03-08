@@ -7,19 +7,24 @@ var forexControllers = angular.module('forexControllers', []);
 forexControllers.controller('LoginCtrl', ['$scope', '$location', 'User',
   function ($scope, $location, User) {
 
-  	if (sessionStorage.AuthUser) {
-  		$location.path('wallet/' + sessionStorage.AuthUser);
+    if ($.parseJSON(sessionStorage.user)) {
+          $location.path('wallet/' + $.parseJSON(sessionStorage.user.Id));
   	}
 
-  	$scope.user = User.get({}, function (user) {
-  		$scope.user = user.Users;
+  	$scope.users = User.get({}, function (list) {
+  	    console.log(list);
+  	    $scope.users = list.Users;
   	});
 
-  	$scope.onchange = function (user) {
-  		if (user != undefined) {
-  			sessionStorage.AuthUser = user;
-  			$location.path('wallet/' + user);
-  		}
+  	$scope.onChange = function () {
+  	    for (var i = 0; i < $scope.users.length; i++) {
+  	        if ($scope.users[i].Id == $scope.userSelected) {
+  	            console.log($scope.users[i]);
+  	            sessionStorage.setItem('user', JSON.stringify($scope.users[i]));
+  	            $location.path('wallet/' + $scope.users[i].Id);
+  	            break;
+  	  	    }
+  	    }
   	}
 
   }]
@@ -64,18 +69,21 @@ forexControllers.controller('ForexCtrl', ['$scope','$http','Forex',
   	    $scope.rates = forex.rates;
   		/*console.log(forex.rates);*/
   	});
-  	$scope.order = function (amount,currency) {
+
+  	$scope.success = false;
+
+  	$scope.order = function (amount, currency) {
+  	    var user = $.parseJSON(sessionStorage.user);
   	    if (amount > 0) {
-  	        console.log("start");
   	        var data = {
-  	            "UserId": { "Id":sessionStorage.AuthUser}, // Creates new user..
+  	            "UserId": user, // Creates new user..
   	            "Currency": currency,
   	            "BuyDate": 1457357484,
   	            "SellDate": 1457368284,
   	            "Amount": amount
   	        };
   	        $http.post('/api/order/', data).then(function successCallback(response) {
-  	            console.log(response);
+  	            $scope.success = true;
   	        }, function errorCallback(response) {
   	            console.log("Error :" +response)
   	        });

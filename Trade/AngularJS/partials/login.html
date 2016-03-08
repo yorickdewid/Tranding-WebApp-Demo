@@ -1,7 +1,9 @@
 <h2>Login</h2>
 <div class="col-lg-4"></div>
  <div class="col-lg-4">
-  <select class="form-control" ng-model="user" ng-options="us.Id as us.Name for us in user" ng-change="onchange(user)">
+  <select class="form-control" ng-model="userSelected"
+          ng-options="us.Id as us.Name for us in users" 
+          ng-change="onChange()">
    <option value="">Select Account</option>
   </select>
   <a href="#users">Manage Users</a>
