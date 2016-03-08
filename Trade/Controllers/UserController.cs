@@ -70,5 +70,21 @@ namespace Trade.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+        //DELETE
+        [ResponseType(typeof(User))]
+        public IHttpActionResult DeleteUser(int id)
+        {
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            db.Users.Remove(user);
+            db.SaveChanges();
+
+            return Ok(user);
+        }
     }
 }

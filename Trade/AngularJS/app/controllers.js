@@ -85,15 +85,22 @@ forexControllers.controller('ForexCtrl', ['$scope','$http','Forex',
   }]
 );
 
-forexControllers.controller('UsersCtrl', ['$scope', '$http', 'User',
-  function ($scope, $http, User) {
+forexControllers.controller('UsersCtrl', ['$scope', '$http', '$route', 'User',
+  function ($scope, $http, $route, User) {
       $scope.users = User.get({}, function (user) {
           $scope.users = user.Users;
       });
 
       $scope.delete = function (user) {
           console.log("delete user " + user.Id);
-          //$http.post etc...
+
+          $http.delete('/api/user/' + user.Id).then(function successCallback(response) {
+              console.log(response);
+              $route.reload();
+          }, function errorCallback(response) {
+              console.log("Error :" + response)
+          });
+
       }
   }]
 );
