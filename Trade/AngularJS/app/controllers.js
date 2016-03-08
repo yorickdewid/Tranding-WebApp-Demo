@@ -84,3 +84,16 @@ forexControllers.controller('ForexCtrl', ['$scope','$http','Forex',
 
   }]
 );
+
+forexControllers.controller('UsersCtrl', ['$scope', '$http', 'User',
+  function ($scope, $http, User) {
+      $scope.users = User.get({}, function (user) {
+          $scope.users = user.Users;
+      });
+
+      $scope.delete = function (user) {
+          console.log("delete user " + user.Id);
+          //$http.post etc...
+      }
+  }]
+);

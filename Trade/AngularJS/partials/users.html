@@ -1,0 +1,15 @@
+﻿<h2>Overview of users</h2>
+<hr />
+<table class="table table-bordered" style="width:400px;margin:auto">
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{ user.Name }}</td>
+            <td><button class="btn btn-xs btn-danger" ng-click="delete(user)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
