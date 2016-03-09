@@ -29,6 +29,10 @@ forexApp.config(['$routeProvider',
           templateUrl: 'AngularJs/partials/users.html',
           controller:'UsersCtrl'
       }).
+      when('/logout', {
+      	templateUrl: 'AngularJs/partials/login.html',
+      	controller: 'AuthCtrl'
+      }).
       otherwise({
         redirectTo: '/login'
       });

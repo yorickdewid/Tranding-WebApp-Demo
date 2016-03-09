@@ -15,14 +15,12 @@ forexControllers.controller('LoginCtrl', ['$scope', '$location', 'User',
       }
 
       $scope.users = User.get({}, function (list) {
-          console.log(list);
           $scope.users = list.Users;
       });
 
       $scope.onChange = function () {
           for (var i = 0; i < $scope.users.length; i++) {
               if ($scope.users[i].Id == $scope.userSelected) {
-                  console.log($scope.users[i]);
                   sessionStorage.setItem('user', JSON.stringify($scope.users[i]));
                   $location.path('wallet/' + $scope.users[i].Id);
                   break;
@@ -70,9 +68,7 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
      }
 
      function getForexRate(currency,callback) {
-         console.log(currency);
          var url = '/api/forex/' + currency;
-         console.log(url);
          $http.get(url).then(function successCallback(response) {
              callback(response.data);
          }, function errorCallback(response) {
@@ -93,11 +89,15 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
  }]
 );
 
-forexControllers.controller('ForexCtrl', ['$scope', '$http', 'Forex',
-  function ($scope, $http, Forex) {
-      $scope.forex = Forex.get({}, function (forex) {
+forexControllers.controller('ForexCtrl', ['$scope', '$http', 'Forex', '$location',
+  function ($scope, $http, Forex, $location) {
+
+  	if (!sessionStorage.getItem("user")) {
+  		$location.path('/');
+  	}
+  	
+		$scope.forex = Forex.get({}, function (forex) {
           $scope.rates = forex.Rates;
-          /*console.log(forex.rates);*/
       });
 
       $scope.succes = false;
@@ -124,22 +124,29 @@ forexControllers.controller('ForexCtrl', ['$scope', '$http', 'Forex',
   }]
 );
 
-forexControllers.controller('UsersCtrl', ['$scope', '$http', '$route', 'User',
-  function ($scope, $http, $route, User) {
-      $scope.users = User.get({}, function (user) {
+forexControllers.controller('UsersCtrl', ['$scope', '$http', '$route', 'User', '$location',
+  function ($scope, $http, $route, User, $location) {
+  	if (!sessionStorage.getItem("user")) {
+  		$location.path('/');
+  	}
+
+  	$scope.users = User.get({}, function (user) {
           $scope.users = user.Users;
       });
 
       $scope.delete = function (user) {
-          console.log("delete user " + user.Id);
-
           $http.delete('/api/user/' + user.Id).then(function successCallback(response) {
-              console.log(response);
               $route.reload();
           }, function errorCallback(response) {
-              console.log("Error :" + response)
+              console.log(response)
           });
 
       }
   }]
+);
+
+forexControllers.controller('AuthCtrl', ['$location', function ($location) {
+	sessionStorage.clear();
+	$location.path('/');
+}]
 );
