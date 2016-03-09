@@ -56,31 +56,27 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
      $scope.sell = function (order) {
          order.BuyDate = Math.round((order.BuyDate).getTime() / 1000);
          order.SellDate = Math.round((new Date()).getTime() / 1000);
-         $scope.getForexRate(order.Currency, function (rate) {
-             console.log("callback");
-             if (rate != undefined) {
-                 order.SellRate = rate.Ratio;
-             }
-             console.log(order);
+         getForexRate(order.Currency, function (rate) {
+         	order.SellRate = rate.Ratio;
 
              $http.put('/api/order/', order).then(function successCallback(response) {
-                 console.log(response);
-                 order.message = "Sold forex";
+             	order.BuyDate = Math.round(order.BuyDate * 1000);
+             	order.SellDate = Math.round(order.SellDate * 1000);
+             	order.profit = (order.SellRate - order.BuyRate) * order.Amount;
              }, function errorCallback(response) {
                  console.log(response);
-                 order.message = "Failed to sell forex";
              });
          });
      }
 
-     $scope.getForexRate = function (currency,callback) {
+     function getForexRate(currency,callback) {
          console.log(currency);
          var url = '/api/forex/' + currency;
          console.log(url);
          $http.get(url).then(function successCallback(response) {
              callback(response.data);
          }, function errorCallback(response) {
-             callback(undefined);
+         	 console.log(response);
          });
      }
 

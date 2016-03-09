@@ -12,7 +12,7 @@
         <tr ng-repeat="rate in rates" ng-class="{'btn-success' : rate.success ,'btn-danger' : rate.failed}">
             <td>{{ rate.Code }}</td>
             <td>{{ rate.Ratio }}</td>
-            <td><input type="text" ng-model="orderAmount"></td>
+            <td><input type="number" min="0" ng-model="orderAmount"></td>
             <td><button class="btn btn-xs btn-success" ng-click="order(orderAmount,rate)">Buy</button></td>
         </tr>
     </tbody>
