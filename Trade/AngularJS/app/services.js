@@ -7,7 +7,7 @@ var forexServices = angular.module('forexServices', ['ngResource']);
 
 forexServices.factory('Forex', ['$resource',
   function($resource){
-    return $resource('AngularJs/data/forex.json', {}, {
+    return $resource('api/forex', {}, {
       query: {method:'GET', params:{}, isArray:true}
     });
   }]

@@ -69,32 +69,27 @@ forexControllers.controller('WalletCtrl', ['$scope', '$routeParams', '$http',
 forexControllers.controller('ForexCtrl', ['$scope', '$http', 'Forex',
   function ($scope, $http, Forex) {
   	$scope.forex = Forex.get({}, function (forex) {
-  	    $scope.rates = forex.rates;
+  	    $scope.rates = forex.Rates;
   		/*console.log(forex.rates);*/
   	});
 
   	$scope.succes = false;
   	$scope.failure = false;
 
-  	$scope.colorVal = '';
-  	var colCount = 0;
-  	var colorArr = ['redBg', 'greenBg'];
-  	var currColor = '';
-
-  	$scope.order = function (amount, currency,tmp) {
+  	$scope.order = function (amount, rate) {
   	    var user = $.parseJSON(sessionStorage.user);
   	    if (amount > 0) {
   	        var data = {
   	            "UserId": user.Id, // Creates new user..
-  	            "Currency": currency,
+  	            "Currency": rate.Code,
   	            "BuyDate": 1457357484,
   	            "SellDate": 1457368284,
   	            "Amount": amount
   	        };
   	        $http.post('/api/order/', data).then(function successCallback(response) {
-  	            $scope.success = true;
+  	            rate.success = true;
   	        }, function errorCallback(response) {
-  	            $scope.failure = false;
+  	            rate.failure = false;
   	        });
   	    }
   	}

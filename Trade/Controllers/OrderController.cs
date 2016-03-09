@@ -15,7 +15,7 @@ namespace Trade.Controllers
         private DBCreate db = new DBCreate();
 
         //GET api/order/
-        public IHttpActionResult GetAllProducts()
+        public IHttpActionResult GetOrders()
         {
             return Json(db.Orders);
         }
