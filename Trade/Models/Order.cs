@@ -13,6 +13,8 @@ namespace Trade.Models
         public string Currency { get; set; }
         public long BuyDate { get; set; }
         public long SellDate { get; set; }
+        public double BuyRate { get; set; }
+        public double SellRate { get; set; }
         public int Amount { get; set; }
     }
 }

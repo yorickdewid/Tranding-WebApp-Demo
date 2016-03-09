@@ -19,7 +19,7 @@
     <td>{{ cur.SellDate ? (cur.SellDate | date:'dd-MM-yyyy HH:mm:ss') : '-' }}</td>
     <td>{{ cur.Amount }}</td>
     <td>{{ cur.profit ? (cur.profit > 0 ? ('+' + cur.profit | number:2) : (cur.profit | number:2)) : '-' }}</td>
-    <td><button ng-if="!cur.profit" class="btn btn-xs btn-danger">Sell shares</button></td>
+    <td><button ng-show="!cur.SellDate" ng-if="!cur.profit" class="btn btn-xs btn-danger" ng-click="sell(cur)">Sell shares</button></td>
    </tr>
   </tbody>
  </table>

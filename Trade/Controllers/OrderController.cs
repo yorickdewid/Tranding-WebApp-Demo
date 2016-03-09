@@ -14,13 +14,13 @@ namespace Trade.Controllers
     {
         private DBCreate db = new DBCreate();
 
-        //GET api/order/
+        [HttpGet]
         public IHttpActionResult GetOrders()
         {
             return Json(db.Orders);
         }
 
-        //GET api/order/3
+        [HttpGet]
         public IHttpActionResult GetOrderById(int id)
         {
             Order o = db.Orders.Find(id);
@@ -29,8 +29,34 @@ namespace Trade.Controllers
             return Ok(o);
         }
 
-        //insert
-        // POST api/order
+        [HttpPut]
+        public IHttpActionResult PutOrder(Order o)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            db.Entry(o).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderExists(o.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpPost]
         public IHttpActionResult PostOrder(Order o)
         {
             if (!ModelState.IsValid)
@@ -38,6 +64,11 @@ namespace Trade.Controllers
             db.Orders.Add(o);
             db.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = o.Id }, o);
+        }
+
+        private bool OrderExists(int id)
+        {
+            return db.Orders.Count(e => e.Id == id) > 0;
         }
     }
 }

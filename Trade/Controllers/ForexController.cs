@@ -27,5 +27,20 @@ namespace Trade.Controllers
             return Json(collectionWrapper);
         }
 
+        [Route("api/forex/{name}")]
+        public IHttpActionResult GetForex(string name)
+        {
+            db.Forexes.Load();
+
+            try {
+                var forex = db.Forexes.Where(x => x.Code == name).First();
+                return Json(forex);
+            } catch( Exception e)
+            {
+                return NotFound();
+            }
+
+        }
+
     }
 }
