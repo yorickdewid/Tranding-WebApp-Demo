@@ -14,24 +14,22 @@ namespace Trade.Controllers
     {
         private DBCreate db = new DBCreate();
 
-        // GET
         [ResponseType(typeof(Wallet))]
         public IHttpActionResult GetWallet(int id)
         {
             db.Orders.Load();
             db.Users.Load();
             Wallet wallet = null;
-            IEnumerable<Wallet> tmp = db.Wallets.Where(x => x.UserId.Id == id);
-            if (tmp.Count() > 0)
-            {
-                wallet = tmp.First();
-            }
-            if (wallet == null)
+            var tmp = from w in db.Wallets
+                         where w.UserId.Id == id
+                         select w;
+            if (tmp == null)
             {
                 return NotFound();
             }
             try
             {
+                wallet = tmp.First();
                 wallet.Trades = db.Orders.Where(x => x.UserId == wallet.UserId.Id).ToList();
             }
             catch (Exception e)
@@ -42,7 +40,6 @@ namespace Trade.Controllers
             return Json(wallet);
         }
 
-        // PUT
         [ResponseType(typeof(void))]
         public IHttpActionResult PutWallet(int id, Wallet wallet)
         {

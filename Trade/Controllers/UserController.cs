@@ -29,7 +29,6 @@ namespace Trade.Controllers
             return Json(collectionWrapper);
         }
 
-        // GET
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
@@ -43,7 +42,6 @@ namespace Trade.Controllers
             return Json(User);
         }
 
-        // PUT
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -71,7 +69,6 @@ namespace Trade.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //DELETE
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
