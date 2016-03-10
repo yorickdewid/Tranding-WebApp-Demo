@@ -949,7 +949,9 @@
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="test\e2e\spec.js" />
+    <Content Include="test\karma.conf.js" />
     <Content Include="test\protractor_conf.js" />
+    <Content Include="test\unit\spec.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -973,6 +975,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
