@@ -12,7 +12,6 @@ namespace Trade.Controllers
     {
         private DBCreate db = new DBCreate();
 
-        //GET api/order/
         public IHttpActionResult GetRates()
         {
             db.Forexes.Load();
