@@ -37,20 +37,21 @@ describe('Forex Overview', function () {
 
         expect(rateList.first().getAttribute('class')).toMatch('btn-success');
     });
-    /*
+    
     it('should at an entry to my wallet when I buy the currency', function () {
         browser.get('/#/wallet');
-        var orderListSize = element.all(by.repeater('cur in trades')).count();
 
-        browser.get('/#/forex');
-        var rateList = element.all(by.repeater('rate in rates'));
-        rateList.first().element(by.model('orderAmount')).sendKeys('666');
-        rateList.first().element(by.tagName('button')).click();
+        element.all(by.repeater('cur in trades')).count().then(function (orderListSize) {
 
-        browser.get('/#/wallet');
-        expect(element.all(by.repeater('cur in trades')).count()).toBe(orderListSize + 1);
-        
-    });*/
+            browser.get('/#/forex');
+            var rateList = element.all(by.repeater('rate in rates'));
+            rateList.first().element(by.model('orderAmount')).sendKeys('666');
+            rateList.first().element(by.tagName('button')).click();
+
+            browser.get('/#/wallet');
+            expect(element.all(by.repeater('cur in trades')).count()).toBe(orderListSize + 1);
+        });
+    });
 
     afterEach(function () {
         browser.get('/#/logout');

@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AngularJS\data\wallet.json" />
+    <Content Include="AngularJS\partials\users.html" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -951,7 +952,7 @@
     <Content Include="test\e2e\spec.js" />
     <Content Include="test\karma.conf.js" />
     <Content Include="test\protractor_conf.js" />
-    <Content Include="test\unit\spec.js" />
+    <Content Include="test\unit\unitspec.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
